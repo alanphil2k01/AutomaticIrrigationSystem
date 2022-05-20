@@ -1,0 +1,3 @@
+[submodule "hardware/lib/ArduinoNvs"]
+	path = hardware/lib/ArduinoNvs
+	url = https://github.com/rpolitex/ArduinoNvs.git
