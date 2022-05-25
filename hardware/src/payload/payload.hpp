@@ -1,3 +1,5 @@
+#include <sensors/sensors.hpp>
+
 class Payload {
     public:
     int soil;
@@ -6,6 +8,7 @@ class Payload {
     int pressure;
     int light;
     bool rain;
+    dht20 dht;
 
     Payload();
 

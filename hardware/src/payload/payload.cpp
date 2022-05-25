@@ -1,4 +1,3 @@
-#include <sensors/sensors.h>
 #include "payload.hpp"
 
 Payload::Payload() {
@@ -8,8 +7,11 @@ Payload::Payload() {
     pressure = 0;
     light = 0;
     rain = false;
+    dht.temperature = 0;
+    dht.humidity = 0;
 }
 
 void Payload::get_payload_data() {
-    soil = get_soil_val();
+    // soil = get_soil_val();
+    dht.dht20_read();
 }
