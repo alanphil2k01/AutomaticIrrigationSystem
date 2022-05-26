@@ -1,3 +1,4 @@
+#include "esp32-hal-adc.h"
 #include "esp32-hal-gpio.h"
 #include <Arduino.h>
 #include <payload/payload.hpp>
@@ -12,16 +13,17 @@ Payload data;
 void setup() {
     Serial.begin(115200);
     pinMode(motor, OUTPUT);
+    analogReadResolution(9);
     // nvs_init();
     // wifi_init();
-    data.dht.dht20_init();
+    data.payload_init();
 }
 
 void loop() {
     data.get_payload_data();
     // dht20_read(&d);
-    DEBUG("Humidity=%f Temperature=%f", data.dht.humidity, data.dht.temperature);
-    delay(500);
+    data.debug_payload_data();
+    delay(1000);
     // delay(1000);
     // Serial.println("ON");
     // digitalWrite(motor, LOW);

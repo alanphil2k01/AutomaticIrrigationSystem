@@ -2,15 +2,16 @@
 
 class Payload {
     public:
-    int soil;
+    byte soil;
     int temperature;
-    int humidity;
     int pressure;
-    int light;
+    byte light;
     bool rain;
-    dht20 dht;
+    dht11 dht;
 
     Payload();
 
+    void payload_init();
     void get_payload_data();
+    void debug_payload_data();
 };

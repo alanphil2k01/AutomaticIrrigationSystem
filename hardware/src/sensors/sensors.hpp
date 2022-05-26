@@ -1,2 +1,5 @@
-// #include "soil/soil.hpp"
+#include "soil/soil.hpp"
+#include "ldr/ldr.hpp"
 #include "dht20/dht20.hpp"
+#include "dht11/dht11.hpp"
+#include "rain/rain.hpp"

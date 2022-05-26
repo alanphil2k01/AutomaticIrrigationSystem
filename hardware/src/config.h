@@ -3,11 +3,11 @@
 // const char* WIFI_SSID = "test";
 // const char* WIFI_PWD="test";
 
-#define SOIL_PIN 0
-#define LDR_PIN 0
-#define HUM_THERM_PIN 0
-#define RAIN_PIN 8
+#define SOIL_PIN 34
+#define LDR_PIN 35
+#define RAIN_PIN 32
 #define MOTOR_PIN 0
+#define DHT_SENSOR_PIN 12
 
 #define DEVICE_ID_ADDR 0
 #define DEVICE_ID_LEN 32
