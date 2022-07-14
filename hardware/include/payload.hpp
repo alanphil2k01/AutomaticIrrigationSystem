@@ -1,7 +1,11 @@
-#include <sensors/sensors.hpp>
+#ifndef PAYLOAD_H
+#define PAYLOAD_H
+
+#include <sensors.hpp>
 
 class Payload {
     public:
+    String device_id;
     byte soil;
     int temperature;
     int pressure;
@@ -11,7 +15,8 @@ class Payload {
 
     Payload();
 
-    void payload_init();
     void get_payload_data();
     void debug_payload_data();
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef NVS_H
+#define NVS_H
+
 #include <ArduinoNvs.h>
 
 void nvs_init();
@@ -9,3 +12,5 @@ uint64_t nvs_get_device_id();
 void nvs_set_ssid(String);
 void nvs_set_pwd(String);
 void nvs_set_device_id(uint64_t);
+
+#endif

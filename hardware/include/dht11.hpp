@@ -1,4 +1,8 @@
+#ifndef DHT11_H
+#define DHT11_H
+
 #include <DHT.h>
+#include <Arduino.h>
 #include <config.h>
 
 class dht11 {
@@ -11,3 +15,5 @@ class dht11 {
     void dht_init();
     void dht_read();
 };
+
+#endif

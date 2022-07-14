@@ -1,4 +1,8 @@
+#ifndef DHT20_H
+#define DHT20_H
+
 #include "DHT20.h"
+#include <Arduino.h>
 
 class dht20 {
     DHT20 DHT;
@@ -11,3 +15,5 @@ class dht20 {
     void dht_read();
 };
 
+
+#endif

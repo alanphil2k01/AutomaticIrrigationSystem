@@ -1,3 +1,6 @@
+#ifndef SOIL_H
+#define SOIL_H
+
 #include <Arduino.h>
 #include <config.h>
 
@@ -5,3 +8,5 @@
 #define WATER_VAL 172
 
 byte soil_read();
+
+#endif

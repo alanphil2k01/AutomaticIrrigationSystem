@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "dht11.hpp"
+#include <dht11.hpp>
 
 dht11::dht11() {
     humidity = 0;

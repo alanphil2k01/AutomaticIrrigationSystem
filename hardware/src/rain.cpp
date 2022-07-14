@@ -1,4 +1,4 @@
-#include "rain.hpp"
+#include <rain.hpp>
 
 void rain_init() {
     pinMode(RAIN_PIN, INPUT);

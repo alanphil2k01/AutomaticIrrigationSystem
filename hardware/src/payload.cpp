@@ -1,17 +1,17 @@
 #include "payload.hpp"
-#include <serial_debugger/debug.hpp>
+#include <debug.hpp>
+#include <nvs.hpp>
+#include <config.h>
 
 Payload::Payload() {
+    device_id = DEVICE_ID;
     soil = 0;
     temperature = 0;
     pressure = 0;
     light = 0;
     rain = false;
-}
-
-void Payload::payload_init() {
-    rain_init();
     dht.dht_init();
+    rain_init();
 }
 
 void Payload::get_payload_data() {

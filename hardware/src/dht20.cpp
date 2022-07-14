@@ -1,4 +1,4 @@
-#include "dht20.hpp"
+#include <dht20.hpp>
 
 dht20::dht20() {
     humidity = 0;

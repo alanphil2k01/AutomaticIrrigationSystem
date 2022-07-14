@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <payload/payload.hpp>
+#include <payload.hpp>
 
 void print_sensor_data(char* str, int val) {
     Serial.print(str);
