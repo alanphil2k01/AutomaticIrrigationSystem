@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
-
 import { database } from './firebase/firebase';
 import { useEffect, useState } from 'react';
-import { Database, onValue, ref } from 'firebase/database';
+import { onValue, ref } from 'firebase/database';
 
 function App() {
 
