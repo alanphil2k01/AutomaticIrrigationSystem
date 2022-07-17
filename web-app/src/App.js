@@ -1,25 +1,28 @@
 import './App.css';
-import { database } from './firebase/firebase';
-import { useEffect, useState } from 'react';
-import { onValue, ref } from 'firebase/database';
+import {  Login, DeviceData } from './components';
+import PrivateRoute from './utils/PrivateRoute';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
-
-    const [soilData, setSoilData] = useState();
-    useEffect(() => {
-        const querySoil = ref(database,  "A123-12387876123873288123/soil");
-        return onValue(querySoil, (snapshot) => {
-            if (snapshot.exists()) {
-                setSoilData(snapshot.val());
-            }
-        });
-    });
-
     return (
         <div className="App">
-            <p>Soil moisture = { soilData }%</p>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/"
+                            element={<PrivateRoute>
+                                    <DeviceData device_id="A123-12387876123873288123"/>
+                                </PrivateRoute>}
+                      />
+                    <Route exact path="/login" element={<Login />} />
+                </Routes>
+            </BrowserRouter>
         </div>
     );
+    /* return (
+        <div className="App">
+            <DeviceData device_id="A123-12387876123873288123" />
+        </div>
+    ); */
 }
 
 export default App;
