@@ -18,11 +18,6 @@ function App() {
             </BrowserRouter>
         </div>
     );
-    /* return (
-        <div className="App">
-            <DeviceData device_id="A123-12387876123873288123" />
-        </div>
-    ); */
 }
 
 export default App;

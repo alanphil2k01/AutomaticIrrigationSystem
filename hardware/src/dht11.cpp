@@ -11,14 +11,15 @@ void dht11::dht_init() {
 }
 
 void dht11::dht_read() {
-  temperature = dht_sensor.readTemperature();
-  humidity = dht_sensor.readHumidity();
+  int t = dht_sensor.readTemperature();
+  int h = dht_sensor.readHumidity();
 
-  if (isnan(temperature)) {
-    temperature = 0;
+  if (!isnan(t)) {
+    temperature = t;
   }
-  if (isnan(humidity)) {
-    humidity = 0;
+
+  if (!isnan(humidity)) {
+    humidity = h;
   }
 }
 

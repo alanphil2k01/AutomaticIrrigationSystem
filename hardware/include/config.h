@@ -9,4 +9,4 @@
 #define LDR_PIN 35
 #define RAIN_PIN 32
 #define MOTOR_PIN 0
-#define DHT_SENSOR_PIN 12
+#define DHT11_PIN 12

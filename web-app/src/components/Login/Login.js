@@ -1,5 +1,5 @@
 import { } from "firebase/auth";
-import { auth, firestore } from '../../firebase/firebase';
+import { auth } from '../../firebase/firebase';
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from "react";
@@ -9,6 +9,7 @@ import './LoginPage.css'
 function Login() {
     let navigate = useNavigate()
     const { handleUser } = useContext(AuthContext);
+    // TODO: add user to firestore
 
     function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
@@ -17,20 +18,10 @@ function Login() {
                 const user = result.user;
                 handleUser(user)
                 if(user) {
-                    firestore.collection('users').doc(user.uid).set({
-                        uid: user.uid,
-                    });
                     navigate("/");
                 }
             }).catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // const email = error.customData.email;
-                const credential = GoogleAuthProvider.credentialFromError(error);
-                console.log(errorCode)
-                console.log(errorMessage)
-                // console.log(email)
-                console.log(credential)
+                console.log(error);
             });
     }
 

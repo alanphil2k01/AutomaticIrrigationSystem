@@ -14,8 +14,6 @@ String store_path;
 unsigned long sendDataPrevMillis = 0;
 
 void firebase_init(Payload data) {
-  Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
-
   config.api_key = API_KEY;
   auth.user.email = USER_EMAIL;
   auth.user.password = USER_PASSWORD;
@@ -32,11 +30,21 @@ void firebase_init(Payload data) {
   Serial.println(store_path);
 }
 
+void send_data_int(int data, String loc) {
+    Serial.printf("Soil value = %d\n", data);
+    Serial.printf("Set soil data... %s\n", Firebase.setInt(fbdo, store_path + "/" + loc, data) ? "ok" : fbdo.errorReason().c_str());
+}
+
 void firebase_loop(Payload data) {
   if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
-    Serial.printf("Soil value = %d\n", data.soil);
-    Serial.printf("Set soil data... %s\n", Firebase.setInt(fbdo, store_path + "/soil", data.soil) ? "ok" : fbdo.errorReason().c_str());
+
+    send_data_int(data.soil, "soil");
+    send_data_int(data.dht.temperature, "temperature");
+    send_data_int(data.dht.humidity, "humidity");
+    send_data_int(data.rain, "rain");
+    send_data_int(data.light, "light");
+
     Serial.println();
   }
 }
