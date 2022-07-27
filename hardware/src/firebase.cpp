@@ -31,8 +31,8 @@ void firebase_init(Payload data) {
 }
 
 void send_data_int(int data, String loc) {
-    Serial.printf("Soil value = %d\n", data);
-    Serial.printf("Set soil data... %s\n", Firebase.setInt(fbdo, store_path + "/" + loc, data) ? "ok" : fbdo.errorReason().c_str());
+    Serial.printf("%s value = %d\n", loc.c_str(), data);
+    Serial.printf("Set %s data... %s\n", loc.c_str(), Firebase.setInt(fbdo, store_path + "/" + loc, data) ? "ok" : fbdo.errorReason().c_str());
 }
 
 void firebase_loop(Payload data) {
