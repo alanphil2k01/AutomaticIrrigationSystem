@@ -8,7 +8,6 @@ import './SignUpPage.css'
 function SignUp() {
     let navigate = useNavigate()
     const { handleUser } = useContext(AuthContext);
-    // TODO: add user to firestore
 
     function handleSignUp(e) {
         e.preventDefault()
@@ -33,22 +32,15 @@ function SignUp() {
 
     return (
         <div class="login">
-        <div class="login-triangle"></div>
-
-        <h2 class="login-header">Sign Up</h2>
-
-        <form class="login-container" onSubmit={handleSignUp}>
-            <p><input id="username-field" type="username" placeholder="Username"/></p>
-            <p><input id="email-field" type="email" placeholder="Email"/></p>
-            <p><input id="password-field" type="password" placeholder="Password"/></p>
-            <p><input  type="submit" value="Sign up" /></p>
-        </form>
-
-
+            <div class="login-triangle"></div>
+            <h2 class="login-header">Sign Up</h2>
+            <form class="login-container" onSubmit={handleSignUp}>
+                <p><input id="username-field" type="username" placeholder="Username"/></p>
+                <p><input id="email-field" type="email" placeholder="Email"/></p>
+                <p><input id="password-field" type="password" placeholder="Password"/></p>
+                <p><input  type="submit" value="Sign up" /></p>
+            </form>
         </div>
-
-
-
     )
 }
 

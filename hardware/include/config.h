@@ -10,3 +10,7 @@
 #define RAIN_PIN 32
 #define MOTOR_PIN 0
 #define DHT11_PIN 12
+#define PUMP_PIN 2
+
+#define MIN_SOIL_THRESHOLD 20
+#define MAX_SOIL_THRESHOLD 80

@@ -1,3 +1,4 @@
+#include "esp32-hal.h"
 #include <Arduino.h>
 #include <dht11.hpp>
 
@@ -11,14 +12,15 @@ void dht11::dht_init() {
 }
 
 void dht11::dht_read() {
-  int t = dht_sensor.readTemperature();
-  int h = dht_sensor.readHumidity();
+  float t = dht_sensor.readTemperature();
+  delay(500);
+  float h = dht_sensor.readHumidity();
 
   if (!isnan(t)) {
     temperature = t;
   }
 
-  if (!isnan(humidity)) {
+  if (!isnan(h)) {
     humidity = h;
   }
 }

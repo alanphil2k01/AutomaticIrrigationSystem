@@ -158,7 +158,7 @@ void createWebServer() {
                 Serial.println("writing eeprom pass:");
                 nvs_set_pwd(qpass);
 
-                content = "{\"Success\":\"saved to eeprom... reset to boot into new wifi\"}";
+                content = "{\"Success\":\"Successfully recieved data... restarting device\"}";
                 statusCode = 200;
                 ESP.restart();
             } else {

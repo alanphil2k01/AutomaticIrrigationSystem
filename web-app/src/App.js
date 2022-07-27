@@ -1,5 +1,5 @@
 import './App.css';
-import {  Login, DeviceData, SignUp } from './components';
+import {  Login, DeviceData, SignUp, WifiSetup } from './components';
 import PrivateRoute from './utils/PrivateRoute';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -15,6 +15,7 @@ function App() {
                       />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/signup" element={<SignUp />} />
+                    <Route exact path="/wifisetup" element={<WifiSetup />} />
                 </Routes>
             </BrowserRouter>
         </div>

@@ -1,22 +1,51 @@
 import { database } from '../../../firebase/firebase';
 import { useEffect, useState } from 'react';
-import { onValue, ref } from 'firebase/database';
+import { onValue, ref, update } from 'firebase/database';
 
-function FirebaseDataCard(props) {
+function FirebaseDataCard({device_id, sensor, unit}) {
     const [firebaseData, setFirebaseData] = useState();
+
     useEffect(() => {
-        const querySoil = ref(database,  props.device_id + "/" + props.sensor);
+        const querySoil = ref(database,  device_id + "/" + sensor);
         return onValue(querySoil, (snapshot) => {
             if (snapshot.exists()) {
                 setFirebaseData(snapshot.val());
             }
         });
     });
+
     return (
         <div className="DataCard">
-            <p>{ firebaseData }%</p>
+            <p>{ firebaseData }{ unit }</p>
         </div>
     )
 }
 
-export default FirebaseDataCard;
+function FirebaseToggleButton({device_id}) {
+    const [firebaseData, setFirebaseData] = useState();
+
+    function startPump() {
+        const updates = { };
+        updates[`/${device_id}/start_water_pump`] = true;
+        return update(ref(database), updates);
+    }
+
+    useEffect(() => {
+        const querySoil = ref(database,  device_id + "/start_water_pump");
+        return onValue(querySoil, (snapshot) => {
+            if (snapshot.exists()) {
+                setFirebaseData(snapshot.val());
+            }
+        });
+    });
+
+    return (
+        <div className="DataCard">
+            <label>Start Water Pump: </label>
+            <button onClick={startPump}>ON/OFF{firebaseData}</button>
+            <p>{firebaseData ? "true" : "false"}</p>
+        </div>
+    )
+}
+
+export { FirebaseDataCard, FirebaseToggleButton };
