@@ -6,9 +6,8 @@
 #define DEVICE_ID "A123-12387876123873288123"
 
 #define SOIL_PIN 34
-#define LDR_PIN 35
-#define RAIN_PIN 32
-#define MOTOR_PIN 0
+#define LDR_PIN 32
+#define RAIN_PIN 27
 #define DHT11_PIN 12
 #define PUMP_PIN 2
 
