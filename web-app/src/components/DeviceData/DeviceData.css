@@ -1,0 +1,71 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css);
+
+
+
+.iconify {
+  font-size: 24px;
+  line-height: 1em;
+}
+.fa {
+  text-align: center;
+  vertical-align: middle;
+}
+.wrapper {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cards li {
+  border: 2px;
+  border-style: solid;
+  border-radius: 15px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  flex: 1 1 200px;
+}
+
+.cards h2 {
+  border-radius: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: black;
+  margin: 0;
+  padding: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.flex li {
+  flex: 1 1 200px;
+  margin: 10px;
+}
+
+.blue {
+  color: rgb(0, 255, 255);
+}
+
+.darkblue {
+  color: rgb(0, 115, 255);
+}
+
+.red {
+  color:red;
+}
+
+body {
+  background-color: black;
+}
+
+h1 {
+  color: #a972cb;
+}
