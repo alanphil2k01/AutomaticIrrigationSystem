@@ -1,13 +1,13 @@
 import { database } from '../../../firebase/firebase';
 import { useEffect, useState } from 'react';
-import { onValue, ref, update } from 'firebase/database';
+import { onValue, ref, runTransaction } from 'firebase/database';
 
 function FirebaseDataCard({device_id, sensor, unit}) {
     const [firebaseData, setFirebaseData] = useState();
 
     useEffect(() => {
-        const querySoil = ref(database,  device_id + "/" + sensor);
-        return onValue(querySoil, (snapshot) => {
+        const queryData = ref(database,  device_id + "/" + sensor);
+        return onValue(queryData, (snapshot) => {
             if (snapshot.exists()) {
                 setFirebaseData(snapshot.val());
             }
@@ -16,7 +16,10 @@ function FirebaseDataCard({device_id, sensor, unit}) {
 
     return (
         <div className="DataCard">
-            <p>{ firebaseData }{ unit }</p>
+        { unit === "bool" ?
+             firebaseData ? <p>true</p> : <p>false</p>
+            : <p>{ firebaseData }{ unit }</p>
+        }
         </div>
     )
 }
@@ -24,15 +27,18 @@ function FirebaseDataCard({device_id, sensor, unit}) {
 function FirebaseToggleButton({device_id}) {
     const [firebaseData, setFirebaseData] = useState();
 
-    function startPump() {
-        const updates = { };
-        updates[`/${device_id}/start_water_pump`] = true;
-        return update(ref(database), updates);
+    function handleToggleButton() {
+        const pumpRef = ref(database, device_id + "/start_water_pump");
+
+        runTransaction(pumpRef, (start_pump) => {
+            start_pump = !start_pump;
+            return start_pump;
+        });
     }
 
     useEffect(() => {
-        const querySoil = ref(database,  device_id + "/start_water_pump");
-        return onValue(querySoil, (snapshot) => {
+        const queryData = ref(database,  device_id + "/start_water_pump");
+        return onValue(queryData, (snapshot) => {
             if (snapshot.exists()) {
                 setFirebaseData(snapshot.val());
             }
@@ -41,9 +47,8 @@ function FirebaseToggleButton({device_id}) {
 
     return (
         <div className="DataCard">
-            
-            <button onClick={startPump}>ON/OFF{firebaseData}</button>
-            <p>{firebaseData ? "true" : "false"}</p>
+            <p><button style={{ backgroundColor:'transparent', borderWidth: '0px', fontSize: "1em", fontWeight: 'bold', color: 'white'}} onClick={handleToggleButton}>Force start</button>
+             <span> {firebaseData ? "true" : "false"}</span></p>
         </div>
     )
 }

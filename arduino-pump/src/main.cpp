@@ -7,7 +7,7 @@ AF_DCMotor motor(1);
 void setup() {
     Serial.begin(9600);
     pinMode(INPUT_PIN, INPUT);
-    motor.setSpeed(100);
+    motor.setSpeed(200);
 }
 
 int val = 0;

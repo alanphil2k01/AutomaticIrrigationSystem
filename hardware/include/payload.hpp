@@ -9,7 +9,7 @@ class Payload {
     byte soil;
     int temperature;
     int pressure;
-    byte light;
+    int light;
     bool rain;
     dht11 dht;
 

@@ -72,8 +72,9 @@ void firebase_loop(Payload data) {
     Firebase.setInt(fbdo, store_path + "/soil", data.soil);
     Firebase.setFloat(fbdo, store_path + "/temperature", data.dht.temperature);
     Firebase.setFloat(fbdo, store_path + "/humidity", data.dht.humidity);
-    // send_data_int(data.rain, "rain");
-    // send_data_int(data.light, "light");
+    Firebase.setBool(fbdo, store_path + "/rain", data.rain);
+    Firebase.setInt(fbdo, store_path + "/light", data.light);
+
     Serial.println("Sent payload");
   }
 }

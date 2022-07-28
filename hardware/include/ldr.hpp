@@ -4,7 +4,6 @@
 #include <config.h>
 #include <Arduino.h>
 
-void ldr_init();
-byte ldr_read();
+int ldr_read();
 
 #endif
