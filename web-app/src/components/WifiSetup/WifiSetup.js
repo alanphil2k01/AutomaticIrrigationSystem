@@ -8,9 +8,7 @@ function WifiSetup() {
         const pass = document.getElementById("password-field").value
 
         const res = await fetch(`http://192.168.4.1/setting?ssid=${ssid}&pass=${pass}`);
-        console.log(res);
-        const data = await res.json();
-        alert(data);
+        if (res.status === 200) alert("Successfully sent wifi credentials")
     }
 
     return (

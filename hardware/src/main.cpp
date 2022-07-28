@@ -19,6 +19,7 @@ void setup() {
 }
 
 void loop() {
+    wifi_loop();
     data.get_payload_data();
     firebase_loop(data);
     delay(1000);

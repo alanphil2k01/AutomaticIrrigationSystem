@@ -28,7 +28,6 @@ void firebase_init(Payload data) {
 
   Firebase.begin(&config, &auth);
 
-  Firebase.reconnectWiFi(true);
   Firebase.setDoubleDigits(5);
 
   store_path = data.device_id;
@@ -75,5 +74,6 @@ void firebase_loop(Payload data) {
     Firebase.setFloat(fbdo, store_path + "/humidity", data.dht.humidity);
     // send_data_int(data.rain, "rain");
     // send_data_int(data.light, "light");
+    Serial.println("Sent payload");
   }
 }
