@@ -41,7 +41,7 @@ function FirebaseToggleButton({device_id}) {
 
     return (
         <div className="DataCard">
-            <label>Start Water Pump: </label>
+            
             <button onClick={startPump}>ON/OFF{firebaseData}</button>
             <p>{firebaseData ? "true" : "false"}</p>
         </div>
