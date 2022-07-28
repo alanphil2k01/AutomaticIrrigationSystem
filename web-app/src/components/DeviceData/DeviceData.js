@@ -52,6 +52,8 @@ function DeviceData({ device_id }) {
                 <FirebaseDataCard device_id={device_id} sensor={sensors.name="humidity"} unit={sensors.unit="%"} />
          </span>   
       </li>
+      </ul>
+      <ul class="flex cards">
       <li>
         <h2> WATER PUMP</h2>
         <Icon class = "blue" icon="mdi:water-pump" style={{ fontSize: '150px',color:'blue'}} />
@@ -60,25 +62,22 @@ function DeviceData({ device_id }) {
         <FirebaseToggleButton device_id={device_id} />
          </span> 
         </li>
-
+       
         <li>
         <h2>WIFI</h2>
-        <a href="/wifisetup"> <Icon icon="bx:wifi" style={{ fontSize: '140px'}} /></a>      
+        <a href="/wifisetup"> <Icon icon="bx:wifi" style={{ fontSize: '140px'}} /></a>
+           
+             
         
-                
-         
        </li>
-
       <li>
         <h2>LOGOUT</h2>
-        <Icon icon="websymbol:logout" style={{ fontSize: '140px',color:'red'}} onClick={handleLogout} />       
-                
+        <Icon icon="websymbol:logout" style={{ fontSize: '140px',color:'red'}} onClick={handleLogout} />
+                   
          
        </li>
-
     </ul>
-
-    
+   
   </div>
 </body>
 
