@@ -55,7 +55,9 @@ function DeviceData({ device_id }) {
                         <FirebaseDataCard device_id={device_id} sensor={sensors.name="rain"} unit={sensors.unit="bool"} />
                         </span>
                     </li>
+                </ul>
 
+                <ul className="flex cards">
                     <li>
                         <h2> WATER PUMP</h2>
                         <Icon className = "blue" icon="mdi:water-pump" style={{ fontSize: '150px',color:'blue'}} />

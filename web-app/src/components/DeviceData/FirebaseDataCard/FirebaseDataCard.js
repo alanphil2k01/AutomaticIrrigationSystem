@@ -47,7 +47,7 @@ function FirebaseToggleButton({device_id}) {
 
     return (
         <div className="DataCard">
-            <p><button style={{ backgroundColor:'transparent', borderWidth: '0px', fontSize: "1em", fontWeight: 'bold', color: 'white'}} onClick={handleToggleButton}>Force start</button>
+            <p><button style={{ backgroundColor:'transparent',  fontSize: "1em", fontWeight: 'bold', color: 'white'}} onClick={handleToggleButton}>Force start</button>
              <span> {firebaseData ? "true" : "false"}</span></p>
         </div>
     )

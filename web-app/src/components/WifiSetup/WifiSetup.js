@@ -13,10 +13,12 @@ function WifiSetup() {
 
     return (
         <div className="login">
-            <h2>Instructions:</h2>
-            <p>1. Connect to ESP32-WiFi using password as password</p>
-            <p>2. Enter credentials for your wifi network</p>
-            <p>3. Reconnect back to your original network and <a href="/">click here</a></p>
+            <ol style={{ color: '#white' }}>
+                <h2>Instructions:</h2>
+                <li>Connect to ESP32-WiFi using password as password</li>
+                <li>Enter credentials for your wifi network</li>
+                <li>Reconnect back to your original network and <a style={{ color: 'darkblue' }} href="/">click here</a></li>
+            </ol>
 
             <div className="login-triangle"></div>
             <h2 className="login-header">Wifi Setup</h2>
