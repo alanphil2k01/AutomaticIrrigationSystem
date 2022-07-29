@@ -60,6 +60,8 @@ function DeviceData({ device_id }) {
                 <ul className="flex cards">
                     <li>
                         <h2> WATER PUMP</h2>
+                        <span> <span style={{ color: 'rgb(0, 100, 0)' }}>green</span>=pump is on</span>
+                        <span> <span style={{ color: 'rgb(255, 69, 0)' }}>orange</span>=pump is off </span>
                         <Icon className = "blue" icon="mdi:water-pump" style={{ fontSize: '150px',color:'blue'}} />
                         <span  style={ {fontSize : '20px',fontWeight: 'bold'}} >
                         <FirebaseToggleButton device_id={device_id} />
