@@ -13,12 +13,12 @@ function SignUp() {
         e.preventDefault()
         const email = document.getElementById("email-field").value
         const password = document.getElementById("password-field").value
-        console.log(email)
-        console.log(password)
+        const username = document.getElementById("username-field").value
 
         createUserWithEmailAndPassword(auth, email, password)
         .then((result) => {
             const user = result.user;
+            user.displayName = username;
             handleUser(user)
             if(user) {
                 navigate("/");
@@ -39,6 +39,9 @@ function SignUp() {
                 <p><input id="email-field" type="email" placeholder="Email"/></p>
                 <p><input id="password-field" type="password" placeholder="Password"/></p>
                 <p><input  type="submit" value="Sign up" /></p>
+                <p>Already have an account?
+                <a href="/login"> Login</a>
+                </p>
             </form>
         </div>
     )

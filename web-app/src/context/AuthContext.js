@@ -1,17 +1,20 @@
 import { createContext, useState, useEffect } from "react";
-import { auth } from '../firebase/firebase'
+import { firestore, auth } from '../firebase/firebase'
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 export const AuthContext = createContext({})
 
 
 function AuthContextProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(localStorage.getItem('authUser'))
+    const [currentEmail, setCurrentEmail] = useState(localStorage.getItem('authEmail'))
     const [pending, setPending] = useState(true)
 
     const authListener = () => {
         auth.onAuthStateChanged(user => {
             if(user) {
                 setCurrentUser(user)
+                setCurrentEmail(user.email)
                 setPending(false)
             } else {
                 setCurrentUser(null)
@@ -20,9 +23,12 @@ function AuthContextProvider({ children }) {
     }
 
 
-    const handleUser = (user) => {
+    const handleUser = async (user) => {
         setCurrentUser(user)
         localStorage.setItem('authUser', user)
+        localStorage.setItem('authEmail', user.email)
+        const userRef = doc(firestore, 'users', user.email);
+        setDoc(userRef, { name: user.displayName, email: user.email }, { merge: true });
     }
 
     useEffect(() => {
@@ -33,9 +39,10 @@ function AuthContextProvider({ children }) {
     const handleLogout = () => {
         auth.signOut();
         localStorage.removeItem('authUser')
+        localStorage.removeItem('authEmail')
     }
 
-    const value = { currentUser, pending, handleLogout, handleUser }
+    const value = { currentUser, currentEmail, pending, handleLogout, handleUser }
 
 
 

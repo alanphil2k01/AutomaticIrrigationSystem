@@ -1,21 +1,25 @@
-import { auth } from '../../firebase/firebase';
+import { firestore, auth } from '../../firebase/firebase';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css'
+import { doc, getDoc } from 'firebase/firestore';
 
 function Login() {
     let navigate = useNavigate()
     const { handleUser } = useContext(AuthContext);
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault()
         const email = document.getElementById("email-field").value
         const password = document.getElementById("password-field").value
+        const username = (await getDoc(doc(firestore, "users", email))).data().name;
+
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 const user = result.user;
+                user.displayName = username
                 handleUser(user)
                 if(user) {
                     navigate("/");
@@ -24,7 +28,6 @@ function Login() {
             .catch((error) => {
                 alert("Cannot Login: " + error);
             });
-        console.log(email, password)
     }
 
     function signInWithGoogle() {
@@ -51,6 +54,9 @@ function Login() {
                 <p><input id="email-field" type="email" placeholder="Email"/></p>
                 <p><input id="password-field" type="password" placeholder="Password"/></p>
                 <p><input  type="submit" value="Log in" /></p>
+                <p>Don't have an account?
+                <a href="/signup"> Sign Up</a>
+                </p>
             </form>
 
             <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
