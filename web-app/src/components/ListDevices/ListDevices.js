@@ -2,9 +2,9 @@ import { FirebaseDataCard, FirebaseToggleButton }  from './FirebaseDataCard/Fire
 import { AuthContext } from '../../context/AuthContext';
 import { firestore } from '../../firebase/firebase';
 import { useContext, useEffect, useState } from 'react';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, getDoc, getDocFromServer, updateDoc } from 'firebase/firestore';
 import { Icon } from '@iconify/react';
-import './DeviceData.css'
+import './ListDevices.css'
 
 const sensors = [
     { name: "soil", unit: "%" },
@@ -17,13 +17,13 @@ function ListDevices() {
     const { handleLogout, currentEmail } = useContext(AuthContext);
     const [devices, setDevices ] = useState([]);
     const [addDevicePopUp, setAddDevicePopUp ] = useState(false)
+    const [removeDevicePopUp, setRemoveDevicePopUp ] = useState(false)
     const [currentDevice, setCurrentDevice ] = useState()
 
     async function getDevices() {
         getDoc(doc(firestore, "users", currentEmail))
         .then((user) => {
             if (user.get('devices') !== undefined) setDevices(user.data().devices);
-            console.log(devices);
         })
         .catch(error => {
             console.log(error)
@@ -33,11 +33,13 @@ function ListDevices() {
     useEffect(() => {
         const fetchData = async() => {
             try {
-                const user = await getDoc(doc(firestore, "users", currentEmail))
+                const user = await getDocFromServer(doc(firestore, "users", currentEmail))
                 if (user.exists()) {
-                    var data = ""
-                    if (user.get('devices') !== undefined) data = user.data().devices;
-                    return data;
+                    var data
+                    if (user.get('devices') !== undefined) {
+                        data = user.data().devices;
+                        return data;
+                    }
                 }
 
             } catch(err) {
@@ -46,10 +48,11 @@ function ListDevices() {
         };
 
         fetchData().then((data) => {
-            setDevices(data)
+            if(data) setDevices(data)
             if (devices.length > 0) setCurrentDevice(devices[0]);
         });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -58,6 +61,9 @@ function ListDevices() {
             <div>
                 <h1>DASHBOARD</h1>
                 <Dropdown setCurrentDevice={setCurrentDevice} devices={devices} />
+                <Icon icon="bx:refresh" style={{ color:'lightcyan'}} onClick={() => {
+                            getDevices();
+                        }}/>
                 { currentDevice ?
                     <DeviceData device_id={currentDevice}/> :
                     <p style={{ color: "white" }}>No devices selected</p> }
@@ -72,6 +78,18 @@ function ListDevices() {
                             ? <AddDevice style={{display: "block"}}
                                 getDevices={getDevices}
                                 setAddDevicePopUp={setAddDevicePopUp}/>
+                            : <div></div> }
+                    </li>
+                    <li>
+                        <h2>REMOVE DEVICE</h2>
+                        <Icon icon="bx:minus" style={{ fontSize: '140px',color:'red'}} onClick={() => {
+                            setRemoveDevicePopUp(!removeDevicePopUp);
+                        }}/>
+                        { removeDevicePopUp
+                            ? <RemoveDevice style={{display: "block"}}
+                                getDevices={getDevices}
+                                devices={devices}
+                                setRemoveDevicePopUp={setRemoveDevicePopUp}/>
                             : <div></div> }
                     </li>
                     <li>
@@ -177,6 +195,33 @@ function AddDevice({ getDevices, setAddDevicePopUp }) {
     )
 }
 
+function RemoveDevice({ getDevices, setRemoveDevicePopUp, devices }) {
+    const { currentUser } = useContext(AuthContext);
+    const userRef = doc(firestore, "users", currentUser.email);
+
+    const handleRemoveDevice = async (device_id) => {
+        await updateDoc(userRef, {
+            devices: arrayRemove(device_id)
+        })
+        .then(() => getDevices())
+        .catch((error) => console.log(error))
+
+        setRemoveDevicePopUp(false);
+    }
+
+    return (
+        <div className="form-popup" id="myForm">
+            <div className="form-container">
+                <h1>Remove Device</h1>
+                { devices && devices.map((device_id) => (
+                    <button className="btn removeDeviceBtn" onClick={ () => {handleRemoveDevice(device_id)}}>{device_id}</button>
+                ))}
+                <button type="button" class="btn cancel" onClick={() => setRemoveDevicePopUp(false)}>Close</button>
+            </div>
+        </div>
+    )
+}
+
 function Dropdown({ devices, setCurrentDevice }) {
     return (
         <div className="dropdown">
@@ -191,4 +236,5 @@ function Dropdown({ devices, setCurrentDevice }) {
         </div>
     )
 }
+
 export default ListDevices;
